@@ -1,0 +1,74 @@
+@use '../../abstracts/variables';
+@use '../../abstracts/mixins';
+
+.user-list-container {
+    @include mixins.flex(column, flex-start, stretch);
+    gap: variables.$spacing-xl;
+
+    h1 {
+        text-align: center;
+        color: variables.$primary-color;
+        margin-bottom: variables.$spacing-md;
+        font-size: 2rem;
+        position: relative;
+
+        &::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: variables.$primary-color;
+            margin: variables.$spacing-sm auto 0;
+            border-radius: 3px;
+        }
+    }
+
+    .user-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: variables.$spacing-xl;
+
+        @include mixins.respond-to(md) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .loading, .error, .no-results {
+        text-align: center;
+        margin: variables.$spacing-xl 0;
+        padding: variables.$spacing-xl;
+        border-radius: variables.$border-radius;
+        @include mixins.card;
+    }
+
+    .loading {
+        color: variables.$primary-color;
+
+        &::after {
+            content: "...";
+            animation: dots 1.5s infinite;
+        }
+    }
+
+    .error {
+        color: variables.$error-color;
+        border-left: 4px solid variables.$error-color;
+    }
+
+    .no-results {
+        color: variables.$text-color-light;
+        border-left: 4px solid variables.$border-color;
+    }
+}
+
+@keyframes dots {
+    0%, 20% {
+        content: ".";
+    }
+    40% {
+        content: "..";
+    }
+    60%, 100% {
+        content: "...";
+    }
+}

@@ -1,0 +1,12 @@
+@use 'abstracts/variables';
+@use 'abstracts/mixins';
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: variables.$spacing-xl variables.$spacing-md;
+
+  @include mixins.respond-to(md) {
+    padding: variables.$spacing-md;
+  }
+}

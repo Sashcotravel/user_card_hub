@@ -1,0 +1,62 @@
+@use '../../abstracts/variables';
+@use '../../abstracts/mixins';
+
+.user-card {
+    @include mixins.card;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: variables.$box-shadow-hover;
+    }
+
+    &__header {
+        background: linear-gradient(135deg, variables.$primary-color, variables.$primary-color-dark);
+        color: white;
+        padding: variables.$spacing-lg;
+        border-bottom: 1px solid variables.$border-color;
+
+        h2 {
+            margin-bottom: variables.$spacing-xs;
+            font-size: 1.5rem;
+        }
+
+        .username {
+            opacity: 0.8;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                background-color: rgba(255, 255, 255, 0.6);
+                border-radius: 50%;
+                margin-right: variables.$spacing-xs;
+            }
+        }
+    }
+
+    &__content {
+        padding: variables.$spacing-lg;
+        @include mixins.flex(column);
+        gap: variables.$spacing-sm;
+
+        p {
+            margin: 0;
+
+            strong {
+                color: variables.$primary-color-dark;
+                font-weight: 600;
+            }
+        }
+    }
+
+    &__address, &__company {
+        margin-top: variables.$spacing-sm;
+        padding-top: variables.$spacing-sm;
+        border-top: 1px solid variables.$border-color;
+    }
+}
